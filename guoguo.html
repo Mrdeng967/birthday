@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郭相男，生日快乐！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "微软雅黑", Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin: 2rem 0;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        .love-letter {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .photo-frame:hover {
+            transform: scale(1.05);
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+        }
+        .cake {
+            margin: 40px auto;
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .cake-base {
+            width: 200px;
+            height: 100px;
+            background-color: #f9c5d1;
+            border-radius: 10px 10px 50px 50px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .cake-top {
+            width: 180px;
+            height: 30px;
+            background-color: #f3e7e9;
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            top: -30px;
+            left: 10px;
+        }
+        .candle {
+            width: 10px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ffdb58, #ffa500);
+            position: absolute;
+            top: -80px;
+            left: 95px;
+            border-radius: 5px;
+        }
+        .flame {
+            width: 15px;
+            height: 30px;
+            background: radial-gradient(ellipse at center, #ffdb58 0%, #ffa500 100%);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -110px;
+            left: 93px;
+            animation: flicker 1s ease-in-out infinite;
+        }
+        .button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+        .button:active {
+            transform: translateY(1px);
+        }
+        .wishes {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 30px 0;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .countdown {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.8;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes flicker {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>郭相男，生日快乐！</h1>
+        
+        <div class="countdown" id="countdown">距离你的生日还有：计算中...</div>
+        
+        <div class="cake">
+            <div class="flame" id="flame"></div>
+            <div class="candle"></div>
+            <div class="cake-top"></div>
+            <div class="cake-base"></div>
+        </div>
+        
+        <button class="button" id="wishButton">点击许愿</button>
+        
+        <div class="love-letter">
+            <h2>亲爱的郭相男：</h2>
+            <p>在你这特别的日子里，我想对你说，你是我生命中最美好的存在。</p>
+            <p>感谢你带给我的每一个微笑，每一次温暖，每一刻幸福。</p>
+            <p>你的善良、聪明和坚强一直是我崇拜的。</p>
+            <p>希望在新的一岁里，你能继续保持乐观和勇气，实现你所有的梦想。</p>
+            <p>无论前方有什么，我都会一直陪伴在你身边。</p>
+            <p>生日快乐，我的爱！</p>
+        </div>
+        
+        <div class="wishes" id="wishes">我们珍贵的回忆...</div>
+        
+        <div class="photo-gallery">
+            <div class="photo-frame">
+                <img src="./1.jpg" alt="回忆1">
+            </div>
+            <div class="photo-frame">
+                <img src="./2.jpg" alt="回忆2">
+            </div>
+            <div class="photo-frame">
+                <img src="./3.jpg" alt="回忆3">
+            </div>
+            <div class="photo-frame">
+                <img src="./4.jpg" alt="回忆4">
+            </div>
+            <div class="photo-frame">
+                <img src="./5.jpg" alt="回忆4">
+            </div>
+        </div>
+        
+        <button class="button" id="surpriseButton">点击有惊喜</button>
+    </div>
+
+    <script>
+        // 生成心形
+        function createHearts() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // 更新倒计时
+        function updateCountdown() {
+            const now = new Date();
+            // 将生日设为今天
+            const birthday = new Date(now);
+            
+            document.getElementById('countdown').innerText = '生日快乐！今天是你的大日子！';
+            celebrate();
+        }
+
+        // 点蜡烛许愿
+        document.getElementById('wishButton').addEventListener('click', function() {
+            // 吹灭蜡烛
+            document.getElementById('flame').style.opacity = 0;
+            
+            // 创建五彩纸屑
+            createConfetti();
+            
+            // 显示许愿动画和特效
+            showWishAnimation();
+        });
+
+        // 许愿动画和特效
+        function showWishAnimation() {
+            // 创建星星背景遮罩
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            overlay.style.zIndex = '999';
+            overlay.style.display = 'flex';
+            overlay.style.flexDirection = 'column';
+            overlay.style.justifyContent = 'center';
+            overlay.style.alignItems = 'center';
+            overlay.style.transition = 'all 0.5s';
+            
+            // 创建星星
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.innerHTML = '⭐';
+                star.style.position = 'absolute';
+                star.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.opacity = '0';
+                star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out infinite ${Math.random() * 2}s`;
+                
+                const keyframes = `
+                    @keyframes twinkle {
+                        0% { opacity: 0; transform: scale(0.5); }
+                        50% { opacity: 1; transform: scale(1.2); }
+                        100% { opacity: 0; transform: scale(0.5); }
+                    }
+                `;
+                const style = document.createElement('style');
+                style.textContent = keyframes;
+                document.head.appendChild(style);
+                
+                overlay.appendChild(star);
+            }
+            
+            // 创建愿望输入框
+            const wishContainer = document.createElement('div');
+            wishContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            wishContainer.style.padding = '30px 50px';
+            wishContainer.style.borderRadius = '15px';
+            wishContainer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            wishContainer.style.textAlign = 'center';
+            wishContainer.style.maxWidth = '500px';
+            wishContainer.style.width = '90%';
+            wishContainer.style.animation = 'fadeIn 1s ease';
+            
+            const wishTitle = document.createElement('h2');
+            wishTitle.innerText = '✨ 许下你的生日愿望 ✨';
+            wishTitle.style.color = '#ff6b6b';
+            wishTitle.style.marginBottom = '20px';
+            wishContainer.appendChild(wishTitle);
+            
+            const wishInput = document.createElement('textarea');
+            wishInput.placeholder = '写下你的愿望...';
+            wishInput.style.width = '100%';
+            wishInput.style.padding = '15px';
+            wishInput.style.borderRadius = '10px';
+            wishInput.style.border = '2px solid #ffc2c2';
+            wishInput.style.fontSize = '16px';
+            wishInput.style.height = '100px';
+            wishInput.style.resize = 'none';
+            wishInput.style.marginBottom = '20px';
+            wishInput.style.outline = 'none';
+            wishInput.focus();
+            wishContainer.appendChild(wishInput);
+            
+            const submitButton = document.createElement('button');
+            submitButton.innerText = '✨ 实现愿望 ✨';
+            submitButton.style.backgroundColor = '#ff6b6b';
+            submitButton.style.color = 'white';
+            submitButton.style.border = 'none';
+            submitButton.style.borderRadius = '50px';
+            submitButton.style.padding = '12px 30px';
+            submitButton.style.fontSize = '18px';
+            submitButton.style.cursor = 'pointer';
+            submitButton.style.transition = 'all 0.3s';
+            submitButton.style.boxShadow = '0 5px 15px rgba(255, 107, 107, 0.4)';
+            
+            submitButton.onmouseover = () => {
+                submitButton.style.transform = 'scale(1.05)';
+                submitButton.style.boxShadow = '0 8px 20px rgba(255, 107, 107, 0.6)';
+            };
+            submitButton.onmouseout = () => {
+                submitButton.style.transform = 'scale(1)';
+                submitButton.style.boxShadow = '0 5px 15px rgba(255, 107, 107, 0.4)';
+            };
+            
+            submitButton.onclick = () => {
+                const wish = wishInput.value.trim();
+                if (wish) {
+                    // 显示愿望正在实现的动画
+                    wishContainer.innerHTML = '';
+                    
+                    const processingText = document.createElement('h2');
+                    processingText.innerText = '✨ 愿望正在实现... ✨';
+                    processingText.style.color = '#ff6b6b';
+                    processingText.style.marginBottom = '30px';
+                    wishContainer.appendChild(processingText);
+                    
+                    const loader = document.createElement('div');
+                    loader.style.width = '100px';
+                    loader.style.height = '100px';
+                    loader.style.border = '5px solid rgba(255, 255, 255, 0.3)';
+                    loader.style.borderRadius = '50%';
+                    loader.style.borderTop = '5px solid #ff6b6b';
+                    loader.style.animation = 'spin 1s linear infinite';
+                    loader.style.margin = '0 auto 30px auto';
+                    wishContainer.appendChild(loader);
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes spin {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    // 3秒后显示愿望已实现消息
+                    setTimeout(() => {
+                        wishContainer.innerHTML = '';
+                        
+                        const successIcon = document.createElement('div');
+                        successIcon.innerHTML = '🎁';
+                        successIcon.style.fontSize = '60px';
+                        successIcon.style.marginBottom = '20px';
+                        wishContainer.appendChild(successIcon);
+                        
+                        const successText = document.createElement('h2');
+                        successText.innerHTML = `愿望已送达！<br>祝郭相男生日快乐！`;
+                        successText.style.color = '#ff6b6b';
+                        successText.style.marginBottom = '30px';
+                        wishContainer.appendChild(successText);
+                        
+                        const wishText = document.createElement('p');
+                        wishText.innerHTML = `<i>"${wish}"</i>`;
+                        wishText.style.fontSize = '18px';
+                        wishText.style.padding = '15px';
+                        wishText.style.backgroundColor = 'rgba(255, 107, 107, 0.1)';
+                        wishText.style.borderRadius = '10px';
+                        wishText.style.marginBottom = '30px';
+                        wishContainer.appendChild(wishText);
+                        
+                        const closeButton = document.createElement('button');
+                        closeButton.innerText = '关闭';
+                        closeButton.style.backgroundColor = '#ff6b6b';
+                        closeButton.style.color = 'white';
+                        closeButton.style.border = 'none';
+                        closeButton.style.borderRadius = '50px';
+                        closeButton.style.padding = '10px 25px';
+                        closeButton.style.fontSize = '16px';
+                        closeButton.style.cursor = 'pointer';
+                        closeButton.style.transition = 'all 0.3s';
+                        
+                        closeButton.onclick = () => {
+                            overlay.style.opacity = '0';
+                            setTimeout(() => {
+                                overlay.remove();
+                                // 更新页面上的文本（修改为更适合的信息）
+                                document.getElementById('wishes').innerText = '我们珍贵的回忆...';
+                            }, 500);
+                        };
+                        wishContainer.appendChild(closeButton);
+                        
+                        // 播放庆祝音效
+                        createConfetti();
+                    }, 3000);
+                }
+            };
+            
+            wishContainer.appendChild(submitButton);
+            overlay.appendChild(wishContainer);
+            document.body.appendChild(overlay);
+        }
+
+        // 创建五彩纸屑
+        function createConfetti() {
+            const container = document.body;
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                container.appendChild(confetti);
+                
+                const animation = confetti.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate(${Math.random() * 100 - 50}px, ${window.innerHeight + 100}px) rotate(${Math.random() * 1000}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.1, 1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // 惊喜按钮
+        document.getElementById('surpriseButton').addEventListener('click', function() {
+            // 创建更多的心
+            createHearts();
+            
+            // 播放生日歌音效 - 使用更可靠的音频源
+            playBirthdaySong();
+            
+            // 震动效果
+            document.body.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 500);
+            
+            // 创建美化的弹窗而不是使用alert
+            showCustomModal('郭相男，你是最棒的！我爱你！');
+        });
+
+        // 播放生日歌函数（更可靠的版本）
+        function playBirthdaySong() {
+            const audioUrls = [
+                'https://www.bensound.com/bensound-music/bensound-cute.mp3', // 可爱的音乐
+                'https://www.bensound.com/bensound-music/bensound-happiness.mp3', // 欢快的音乐
+                'https://www.chosic.com/wp-content/uploads/2020/05/happy-birthday-to-you.mp3', // 生日歌备选
+                'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3' // 极简备选
+            ];
+            
+            // 创建并添加音频元素到DOM
+            const audioElement = document.createElement('audio');
+            audioElement.id = 'birthday-song';
+            audioElement.controls = false;
+            audioElement.style.display = 'none';
+            document.body.appendChild(audioElement);
+            
+            // 尝试播放第一个音频，如果失败则尝试下一个
+            function tryPlayAudio(index) {
+                if (index >= audioUrls.length) {
+                    console.log('所有音频源都无法播放，请检查网络连接或浏览器设置');
+                    return;
+                }
+                
+                audioElement.src = audioUrls[index];
+                
+                // 添加音频事件监听器
+                const playPromise = audioElement.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('播放成功');
+                    }).catch(error => {
+                        console.log('播放失败，尝试下一个音频源', error);
+                        tryPlayAudio(index + 1);
+                    });
+                }
+            }
+            
+            tryPlayAudio(0);
+        }
+
+        // 添加页面装饰和背景效果
+        function enhancePage() {
+            // 添加浮动气球
+            for (let i = 0; i < 12; i++) {
+                const balloon = document.createElement('div');
+                balloon.innerHTML = ['🎈', '🎂', '🎁', '✨', '🎊', '🎉'][Math.floor(Math.random() * 6)];
+                balloon.style.position = 'fixed';
+                balloon.style.fontSize = (Math.random() * 20 + 30) + 'px';
+                balloon.style.left = Math.random() * 95 + 'vw';
+                balloon.style.top = Math.random() * 100 + 'vh';
+                balloon.style.opacity = '0.7';
+                balloon.style.pointerEvents = 'none';
+                balloon.style.zIndex = '0';
+                balloon.style.animation = `floatUpDown ${Math.random() * 15 + 10}s ease-in-out infinite alternate`;
+                balloon.style.animationDelay = `-${Math.random() * 10}s`;
+                document.body.appendChild(balloon);
+            }
+
+            // 添加星光背景
+            const starsContainer = document.createElement('div');
+            starsContainer.style.position = 'fixed';
+            starsContainer.style.top = '0';
+            starsContainer.style.left = '0';
+            starsContainer.style.width = '100%';
+            starsContainer.style.height = '100%';
+            starsContainer.style.overflow = 'hidden';
+            starsContainer.style.zIndex = '-1';
+            document.body.appendChild(starsContainer);
+
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.width = (Math.random() * 4 + 1) + 'px';
+                star.style.height = (Math.random() * 4 + 1) + 'px';
+                star.style.backgroundColor = '#fff';
+                star.style.borderRadius = '50%';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.boxShadow = '0 0 10px #fff';
+                star.style.animation = `twinkle ${Math.random() * 5 + 3}s ease-in-out infinite`;
+                star.style.animationDelay = `-${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+
+            // 页面标题动画增强
+            const title = document.querySelector('h1');
+            title.style.textShadow = '0 0 10px #ff758c, 0 0 20px #ff7eb3, 0 0 30px #ff758c';
+            title.style.animation = 'titlePulse 2s infinite';
+
+            // 照片框增强
+            const photos = document.querySelectorAll('.photo-frame');
+            photos.forEach((photo, index) => {
+                photo.style.transform = 'rotate(' + (Math.random() * 6 - 3) + 'deg)';
+                photo.style.animation = `photoFloat ${index % 2 ? 4 : 5}s ease-in-out infinite alternate`;
+                photo.style.animationDelay = `-${index * 0.5}s`;
+                photo.style.border = '5px solid white';
+            });
+
+            // 按钮闪光效果
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.style.position = 'relative';
+                button.style.overflow = 'hidden';
+                
+                const shine = document.createElement('div');
+                shine.style.position = 'absolute';
+                shine.style.top = '-50%';
+                shine.style.left = '-50%';
+                shine.style.width = '200%';
+                shine.style.height = '200%';
+                shine.style.background = 'linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%)';
+                shine.style.transform = 'rotate(30deg)';
+                shine.style.animation = 'shine 5s infinite';
+                
+                button.appendChild(shine);
+            });
+
+            // 爱心信封装饰
+            const letter = document.querySelector('.love-letter');
+            letter.style.background = 'linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9))';
+            letter.style.borderTop = '15px solid #ff758c';
+            letter.style.transform = 'rotate(1deg)';
+            letter.style.animation = 'letterFloat 4s ease-in-out infinite';
+
+            // 添加动画关键帧
+            const styleSheet = document.createElement('style');
+            styleSheet.innerHTML = `
+                @keyframes floatUpDown {
+                    0% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-100px) rotate(5deg); }
+                    100% { transform: translateY(50px) rotate(-5deg); }
+                }
+                @keyframes twinkle {
+                    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+                    50% { opacity: 1; transform: scale(1.2); }
+                }
+                @keyframes titlePulse {
+                    0% { transform: scale(1); text-shadow: 0 0 10px #ff758c, 0 0 20px #ff7eb3, 0 0 30px #ff758c; }
+                    50% { transform: scale(1.05); text-shadow: 0 0 15px #ff758c, 0 0 25px #ff7eb3, 0 0 35px #ff758c; }
+                    100% { transform: scale(1); text-shadow: 0 0 10px #ff758c, 0 0 20px #ff7eb3, 0 0 30px #ff758c; }
+                }
+                @keyframes photoFloat {
+                    0% { transform: translateY(0) rotate(${Math.random() * 6 - 3}deg); }
+                    100% { transform: translateY(-10px) rotate(${Math.random() * 6 - 3}deg); }
+                }
+                @keyframes shine {
+                    0% { left: -100%; }
+                    20% { left: 100%; }
+                    100% { left: 100%; }
+                }
+                @keyframes letterFloat {
+                    0% { transform: rotate(1deg); }
+                    50% { transform: rotate(-1deg); }
+                    100% { transform: rotate(1deg); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+        }
+
+        // 自定义模态弹窗
+        function showCustomModal(message) {
+            // 如果已存在模态框则移除
+            const existingModal = document.querySelector('.custom-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // 创建模态框容器
+            const modal = document.createElement('div');
+            modal.classList.add('custom-modal');
+            modal.style.position = 'fixed';
+            modal.style.top = '50%';
+            modal.style.left = '50%';
+            modal.style.transform = 'translate(-50%, -50%)';
+            modal.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            modal.style.padding = '30px 50px';
+            modal.style.borderRadius = '15px';
+            modal.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+            modal.style.zIndex = '1000';
+            modal.style.textAlign = 'center';
+            modal.style.animation = 'fadeIn 0.5s ease';
+            
+            // 添加爱心装饰
+            const hearts = document.createElement('div');
+            hearts.innerHTML = '❤️❤️❤️❤️❤️';
+            hearts.style.fontSize = '24px';
+            hearts.style.margin = '0 0 20px 0';
+            modal.appendChild(hearts);
+            
+            // 添加消息
+            const messageEl = document.createElement('p');
+            messageEl.innerText = message;
+            messageEl.style.fontSize = '24px';
+            messageEl.style.fontWeight = 'bold';
+            messageEl.style.color = '#ff6b6b';
+            messageEl.style.margin = '20px 0';
+            modal.appendChild(messageEl);
+            
+            // 添加演唱会门票
+            const ticketContainer = document.createElement('div');
+            ticketContainer.style.width = '100%';
+            ticketContainer.style.maxWidth = '350px';
+            ticketContainer.style.height = '180px';
+            ticketContainer.style.margin = '30px auto';
+            ticketContainer.style.background = 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)';
+            ticketContainer.style.borderRadius = '10px';
+            ticketContainer.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
+            ticketContainer.style.position = 'relative';
+            ticketContainer.style.overflow = 'hidden';
+            ticketContainer.style.border = '2px dashed #fff';
+            ticketContainer.style.padding = '15px';
+            ticketContainer.style.display = 'flex';
+            ticketContainer.style.flexDirection = 'column';
+            ticketContainer.style.justifyContent = 'space-between';
+            
+            // 添加门票标题
+            const ticketTitle = document.createElement('div');
+            ticketTitle.innerHTML = '🎵 VIP演唱会门票 🎵';
+            ticketTitle.style.fontSize = '22px';
+            ticketTitle.style.fontWeight = 'bold';
+            ticketTitle.style.color = '#fff';
+            ticketTitle.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
+            ticketContainer.appendChild(ticketTitle);
+            
+            // 添加门票说明
+            const ticketDesc = document.createElement('div');
+            ticketDesc.innerHTML = '特别生日礼物';
+            ticketDesc.style.fontSize = '16px';
+            ticketDesc.style.color = '#fff';
+            ticketContainer.appendChild(ticketDesc);
+            
+            // 添加门票详情
+            const ticketDetails = document.createElement('div');
+            ticketDetails.innerHTML = `
+                <p>持有人: 郭相男</p>
+                <p>类型: 任何明星登船票！</p>
+                <p style="font-weight: bold; margin-top: 10px;">凭此截图可兑换任何明星演唱会门票一张</p>
+                <p style="font-size: 10px; font-style: italic; margin-top: 5px;">凭此截图长期有效</p>
+            `;
+            ticketDetails.style.fontSize = '14px';
+            ticketDetails.style.color = '#fff';
+            ticketDetails.style.textAlign = 'left';
+            ticketContainer.appendChild(ticketDetails);
+            
+            // 添加门票底部装饰
+            const ticketFooter = document.createElement('div');
+            ticketFooter.style.display = 'flex';
+            ticketFooter.style.justifyContent = 'space-between';
+            ticketFooter.style.fontSize = '12px';
+            ticketFooter.style.color = 'rgba(255, 255, 255, 0.8)';
+            
+            // 添加序列号
+            const serialNumber = Math.floor(Math.random() * 9000000) + 1000000;
+            ticketFooter.innerHTML = `
+                <span>#${serialNumber}</span>
+                <span>生日专属礼遇</span>
+            `;
+            ticketContainer.appendChild(ticketFooter);
+            
+            // 添加装饰元素
+            const decorElement1 = document.createElement('div');
+            decorElement1.style.position = 'absolute';
+            decorElement1.style.top = '-15px';
+            decorElement1.style.right = '-15px';
+            decorElement1.style.width = '80px';
+            decorElement1.style.height = '80px';
+            decorElement1.style.background = 'rgba(255, 255, 255, 0.2)';
+            decorElement1.style.borderRadius = '50%';
+            ticketContainer.appendChild(decorElement1);
+            
+            const decorElement2 = document.createElement('div');
+            decorElement2.style.position = 'absolute';
+            decorElement2.style.bottom = '-25px';
+            decorElement2.style.left = '-25px';
+            decorElement2.style.width = '100px';
+            decorElement2.style.height = '100px';
+            decorElement2.style.background = 'rgba(255, 255, 255, 0.15)';
+            decorElement2.style.borderRadius = '50%';
+            ticketContainer.appendChild(decorElement2);
+            
+            // 添加验证图章
+            const stamp = document.createElement('div');
+            stamp.style.position = 'absolute';
+            stamp.style.bottom = '10px';
+            stamp.style.right = '10px';
+            stamp.style.width = '50px';
+            stamp.style.height = '50px';
+            stamp.style.borderRadius = '50%';
+            stamp.style.border = '2px dashed rgba(255, 255, 255, 0.6)';
+            stamp.style.display = 'flex';
+            stamp.style.alignItems = 'center';
+            stamp.style.justifyContent = 'center';
+            stamp.style.fontSize = '10px';
+            stamp.style.color = '#fff';
+            stamp.style.transform = 'rotate(-15deg)';
+            stamp.innerText = '已验证';
+            ticketContainer.appendChild(stamp);
+            
+            modal.appendChild(ticketContainer);
+            
+            // 添加兑换说明
+            const redeemInfo = document.createElement('p');
+            redeemInfo.innerText = '💝 给你的特别礼物，演唱会门票等你兑现 💝';
+            redeemInfo.style.fontSize = '16px';
+            redeemInfo.style.color = '#ff6b6b';
+            redeemInfo.style.margin = '15px 0';
+            modal.appendChild(redeemInfo);
+            
+            // 添加更多爱心
+            const hearts2 = document.createElement('div');
+            hearts2.innerHTML = '❤️❤️❤️❤️❤️';
+            hearts2.style.fontSize = '24px';
+            hearts2.style.margin = '20px 0 0 0';
+            modal.appendChild(hearts2);
+            
+            // 添加关闭按钮
+            const closeBtn = document.createElement('button');
+            closeBtn.innerText = '我知道了！';
+            closeBtn.style.backgroundColor = '#ff6b6b';
+            closeBtn.style.color = 'white';
+            closeBtn.style.border = 'none';
+            closeBtn.style.borderRadius = '50px';
+            closeBtn.style.padding = '10px 25px';
+            closeBtn.style.margin = '20px 0 0 0';
+            closeBtn.style.fontSize = '16px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.transition = 'all 0.3s';
+            closeBtn.onmouseover = () => {
+                closeBtn.style.transform = 'scale(1.05)';
+                closeBtn.style.boxShadow = '0 5px 15px rgba(255, 107, 107, 0.4)';
+            };
+            closeBtn.onmouseout = () => {
+                closeBtn.style.transform = 'scale(1)';
+                closeBtn.style.boxShadow = 'none';
+            };
+            closeBtn.onclick = () => {
+                modal.style.animation = 'fadeOut 0.5s ease';
+                setTimeout(() => {
+                    modal.remove();
+                }, 500);
+            };
+            modal.appendChild(closeBtn);
+            
+            // 添加动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translate(-50%, -60%); }
+                    to { opacity: 1; transform: translate(-50%, -50%); }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translate(-50%, -50%); }
+                    to { opacity: 0; transform: translate(-50%, -60%); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // 添加到页面
+            document.body.appendChild(modal);
+            
+            // 点击模态框外部关闭
+            setTimeout(() => {
+                function closeOnOutsideClick(e) {
+                    if (!modal.contains(e.target)) {
+                        modal.style.animation = 'fadeOut 0.5s ease';
+                        setTimeout(() => {
+                            modal.remove();
+                        }, 500);
+                        document.removeEventListener('click', closeOnOutsideClick);
+                    }
+                }
+                document.addEventListener('click', closeOnOutsideClick);
+            }, 100);
+        }
+
+        // 定义celebrate函数
+        function celebrate() {
+            createConfetti();
+            // 播放生日歌
+            playBirthdaySong();
+        }
+
+        // 更新页面标题内容
+        function updatePageContent() {
+            // 移除"我们珍贵的回忆..."文本，避免与相册标题重叠
+            const wishesElement = document.getElementById('wishes');
+            wishesElement.style.display = 'none'; // 隐藏这个元素
+        }
+
+        // 优化照片排版为更明显的心形布局
+        function enhancePhotoGallery() {
+            const gallery = document.querySelector('.photo-gallery');
+            // 清除已有样式
+            gallery.style = '';
+            gallery.innerHTML = '';
+            
+            // 设置心形布局的画廊样式
+            gallery.style.position = 'relative';
+            gallery.style.width = '800px';
+            gallery.style.height = '700px';
+            gallery.style.margin = '20px auto 50px auto';
+            gallery.style.display = 'block';
+            
+            // 定义更明显的心形布局照片位置
+            const positions = [
+                // 左侧心形曲线
+                {top: '150px', left: '100px', rotate: '-15deg', size: '150px'}, // 左上
+                {top: '250px', left: '50px', rotate: '-10deg', size: '160px'}, // 左中上
+                {top: '380px', left: '100px', rotate: '-5deg', size: '150px'}, // 左中下
+                {top: '500px', left: '200px', rotate: '0deg', size: '140px'}, // 左下
+                
+                // 右侧心形曲线
+                {top: '150px', left: '550px', rotate: '15deg', size: '150px'}, // 右上
+                {top: '250px', left: '600px', rotate: '10deg', size: '160px'}, // 右中上
+                {top: '380px', left: '550px', rotate: '5deg', size: '150px'}, // 右中下
+                {top: '500px', left: '450px', rotate: '0deg', size: '140px'}, // 右下
+                
+                // 心形顶部
+                {top: '50px', left: '325px', rotate: '0deg', size: '150px'}, // 顶部
+                
+                // 中间位置可选
+                {top: '300px', left: '325px', rotate: '0deg', size: '180px'} // 中心
+            ];
+            
+            // 设置照片路径
+            const photos = [
+                './1.jpg',
+                './2.jpg',
+                './3.jpg',
+                './4.jpg',
+                './5.jpg',
+                './6.jpg', // 可以替换为其他照片
+                './10.jpg', // 可以替换为其他照片
+                './8.jpg', // 可以替换为其他照片
+                './9.jpg', // 可以替换为其他照片
+                './7.jpg', // 中心照片，可替换
+            ];
+            
+            // 创建心形排列的照片
+            positions.forEach((pos, index) => {
+                if (index < photos.length) {
+                    const frame = document.createElement('div');
+                    frame.className = 'photo-frame';
+                    frame.style.position = 'absolute';
+                    frame.style.top = pos.top;
+                    frame.style.left = pos.left;
+                    frame.style.width = pos.size;
+                    frame.style.height = pos.size;
+                    frame.style.transform = `rotate(${pos.rotate})`;
+                    frame.style.transition = 'all 0.5s ease';
+                    frame.style.border = '8px solid white';
+                    frame.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                    frame.style.zIndex = index === 9 ? '5' : '1'; // 中心照片在最上层
+                    
+                    // 照片悬停效果增强
+                    frame.addEventListener('mouseover', function() {
+                        this.style.transform = `rotate(${pos.rotate}) scale(1.1)`;
+                        this.style.zIndex = '10';
+                        this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.3)';
+                    });
+                    
+                    frame.addEventListener('mouseout', function() {
+                        this.style.transform = `rotate(${pos.rotate})`;
+                        this.style.zIndex = index === 9 ? '5' : '1';
+                        this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                    });
+                    
+                    const img = document.createElement('img');
+                    img.src = photos[index];
+                    img.alt = `回忆${index + 1}`;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    
+                    frame.appendChild(img);
+                    gallery.appendChild(frame);
+                }
+            });
+            
+            // 添加实心心形背景(半透明)，帮助更好地形成心形轮廓
+            const heartBackground = document.createElement('div');
+            heartBackground.style.position = 'absolute';
+            heartBackground.style.width = '100%';
+            heartBackground.style.height = '100%';
+            heartBackground.style.top = '0';
+            heartBackground.style.left = '0';
+            heartBackground.style.zIndex = '-1';
+            heartBackground.style.pointerEvents = 'none';
+            
+            heartBackground.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 800 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M400 600C400 600 700 350 700 200C700 100 600 50 500 50C400 50 400 150 400 150C400 150 400 50 300 50C200 50 100 100 100 200C100 350 400 600 400 600Z" 
+                    fill="rgba(255, 182, 193, 0.2)" stroke="#ff758c" stroke-width="5" />
+                </svg>
+            `;
+            
+            gallery.appendChild(heartBackground);
+            
+            // 添加标题 - 放在画廊上方而不是内部
+            const gallerySection = document.createElement('div');
+            gallerySection.style.width = '100%';
+            gallerySection.style.textAlign = 'center';
+            gallerySection.style.margin = '40px 0 10px 0';
+            
+            const galleryTitle = document.createElement('h2');
+            galleryTitle.innerHTML = '❤️ 我们的爱情相册 ❤️';
+            galleryTitle.style.fontSize = '2.5rem';
+            galleryTitle.style.fontWeight = 'bold';
+            galleryTitle.style.color = '#fff';
+            galleryTitle.style.textShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            galleryTitle.style.marginBottom = '10px';
+            
+            // 将标题添加到文档中，在画廊之前
+            gallery.parentNode.insertBefore(gallerySection, gallery);
+            gallerySection.appendChild(galleryTitle);
+            
+            // 添加描述文字
+            const galleryDesc = document.createElement('p');
+            galleryDesc.innerHTML = '每一张照片都承载着我们的幸福时光';
+            galleryDesc.style.fontSize = '1.2rem';
+            galleryDesc.style.color = '#fff';
+            galleryDesc.style.textShadow = '0 1px 3px rgba(0,0,0,0.2)';
+            galleryDesc.style.marginBottom = '20px';
+            gallerySection.appendChild(galleryDesc);
+        }
+
+        // 初始化
+        createHearts();
+        updateCountdown();
+        enhancePage(); // 增强页面
+        updatePageContent(); // 更新页面内容
+        enhancePhotoGallery(); // 优化照片排版
+    </script>
+</body>
+</html>
